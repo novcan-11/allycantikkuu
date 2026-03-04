@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+
+<style>
+body{
+margin:0;
+font-family:sans-serif;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+background:linear-gradient(135deg,#a1c4fd,#c2e9fb,#d4fc79);
+background-size:400% 400%;
+animation:bg 12s infinite;
+color:#333;
+}
+
+@keyframes bg{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.start{
+position:absolute;
+text-align:center;
+}
+
+.start button{
+padding:15px 25px;
+border:none;
+border-radius:25px;
+background:white;
+cursor:pointer;
+}
+
+.container{
+display:none;
+text-align:center;
+background:rgba(255,255,255,0.6);
+padding:25px;
+border-radius:20px;
+backdrop-filter:blur(12px);
+}
+
+.gallery{
+position:relative;
+width:260px;
+height:260px;
+margin:auto;
+transform-style:preserve-3d;
+animation:rotate 14s infinite linear;
+}
+
+.gallery img{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.gallery img:nth-child(1){transform:rotateY(0deg) translateZ(150px);}
+.gallery img:nth-child(2){transform:rotateY(120deg) translateZ(150px);}
+.gallery img:nth-child(3){transform:rotateY(240deg) translateZ(150px);}
+
+@keyframes rotate{
+from{transform:rotateY(0);}
+to{transform:rotateY(360deg);}
+}
+
+#text{
+margin-top:20px;
+min-height:80px;
+}
+
+.star{
+position:absolute;
+font-size:20px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-100px);}
+100%{transform:translateY(100vh);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="start">
+<h2>ada hadiah kecil buat kamu 🌼</h2>
+<button onclick="openGift()">buka</button>
+</div>
+
+<div class="container">
+
+<div class="gallery">
+<img src="a1.jpg">
+<img src="a5.jpg">
+<img src="a4.jpg">
+</div>
+
+<h2>Happy Birthday 🎂</h2>
+<h4>05 Maret 2011</h4>
+
+<p id="text"></p>
+
+</div>
+
+<script>
+
+function openGift(){
+document.querySelector(".start").style.display="none";
+document.querySelector(".container").style.display="block";
+typeText();
+stars();
+}
+
+const msg=[
+"hari ini hari kamu 🌷",
+"orang lucu lahir hari ini",
+"makasih udah hadir di hidup aku",
+"semoga selalu senyum",
+"aku sayang kamu 🤍"
+];
+
+let i=0,j=0;
+
+function typeText(){
+if(i<msg.length){
+if(j<msg[i].length){
+document.getElementById("text").innerHTML+=msg[i][j];
+j++;
+setTimeout(typeText,40);
+}else{
+document.getElementById("text").innerHTML+="<br>";
+i++;j=0;
+setTimeout(typeText,600);
+}
+}
+}
+
+function stars(){
+setInterval(()=>{
+let s=document.createElement("div");
+s.className="star";
+
+let item=["🌼","🌸","❤️","💖"];
+s.innerHTML=item[Math.floor(Math.random()*item.length)];
+
+s.style.left=Math.random()*100+"vw";
+s.style.animationDuration=(3+Math.random()*3)+"s";
+
+document.body.appendChild(s);
+},400);
+}
+
+</script>
+
+</body>
+</html>
